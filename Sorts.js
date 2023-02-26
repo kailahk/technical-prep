@@ -154,6 +154,80 @@ function radixSort(arrOfNums) {
 
 
 // Merge sort - Ω(log(N)) , Θ(log(N)) , O(log(N)) , O(N) , Stable , Comparison
+// phase 1: split the array in half until you have a bunch of sorted arrays containing one element
+// phase 2: merge those sorted arrays back together with the merge helper fn / 'merge algorithm'
+
+// write merge helper fn / 'merge algorithm'
+function merge(left, right) {
+    let sortedArr = []
+    // Insert the smallest item into sortedArr
+    while (left.length && right.length) {
+        if (left[0] < right[0]) {
+            sortedArr.push(left.shift())
+        } else {
+            sortedArr.push(right.shift())
+        }
+    }
+    // Use spread operators to create a new array, combining the three arrays
+    return [...sortedArr, ...left, ...right]
+}
+
+// write merge sort function that takes an array and uses recursion to halve the arrays
+function mergeSort(arr) {
+    // define base case
+    if (arr.length <= 1) return arr;
+    // find index in middle of array
+    let midIdx = Math.floor(arr.length / 2)
+    // use recursion to merge the sorted arrays
+    let left = mergeSort(arr.slice(0, midIdx))
+    let right = mergeSort(arr.slice(midIdx))
+
+    return merge(left, right)
+}
 
 
 // Quick sort - Ω(log(N))	Θ(log(N)) , O(N^2) , O(log(N)) , Unstable , Comparison
+// not great to use when there are a lot of repeat or similar values in an array. choose merge
+
+// write partition helper function that takes an arr, start idx, and end idx
+function partition(arr, start, end) {
+    // Grab the value of the pivot item from the start of the array
+    const pivot = arr[start]
+    // store the idx of the pivot item in a var to keep track of where the pivot will end up
+    let swapIdx = start
+    // iterate through arr from start to end
+    for (let i = start + 1; i <= end; i++) {
+        // check if currItem in iteration is smaller than value of pivot item
+        if (pivot > arr[i]) {
+            // if so, increase swapIdx
+            swapIdx++
+            if (i !== swapIdx) {
+                // if curr idx in iteration is not equal to swapIdx (if element is not already the right place), SWAP using destructuring assignment
+                [arr[i], arr[swapIdx]] = [arr[swapIdx], arr[i]]
+            }
+        }
+    }
+    // after looping through the array, check if swapIdx is not equal to start (if element is not already the right place)
+    if (swapIdx !== start) {
+        // if so, Swap pivot into correct place using destructuring assignment
+        [arr[swapIdx], arr[start]] = [arr[start], arr[swapIdx]]
+    }
+    // return the swap index
+    return swapIdx
+}
+
+function quickSort(arr, start = 0, end = arr.length - 1) {
+    // define the base case
+    if (start >= end) return
+    // call the partition helper function to get the updated pivot index
+    let pivotIndex = partition(arr, start, end)
+    // once you have the pivot index, recursively call the pivot helper on the 
+    // subarrays to the left and right of that index
+    // Left
+    quickSort(arr, start, pivotIndex - 1)
+    // Right
+    quickSort(arr, pivotIndex + 1, end)
+    // return the sorted array
+    return arr
+}
+
