@@ -23,7 +23,7 @@
 #       - use RESTful routing if possible (GET, POST, EDIT, DELETE), based on the user story or goal of the feature
 #       - REST stands for Representational State Transfer. 
 #       - RESTful routes are a conventional way to map HTTP Methods/Verbs 
-#           (GET, POST, PUT, DELETE) to CRUD actions (create, reade, update, delete)
+#           (GET, POST, PUT, DELETE) to CRUD actions (create, read, update, delete)
 #       - e.g. view all posts
 #           - method: GET, path: /posts ==> view function or CBV: index
 #       - e.g. view specific post
@@ -78,3 +78,54 @@
 #       - if the view function redirects, which is typical with create/update/delete methods, path doesn't contain '.html' but refers to same file
 
 
+# SIMPLE GET REQUEST - uses Python to send HTTP request to server and receives some data from API to read
+#   import requests
+#   api_url = "https://jsonplaceholder.typicode.com/todos/1" <-- before /todos/1 is the BASE_URL
+#   response = requests.get(api_url)
+#   response.json() shows response data as JSON (key-value pairs similar to Python dictionary)
+#   response.status_code shows HTTP status code
+#   response.headers shows python dictionary containing metadata about the response
+
+# SIMPLE POST REQUEST - uses Python to send HTTP request to post data to API and create a new resource
+#   import requests
+#   api_url = "https://jsonplaceholder.typicode.com/todos"
+#   todo = {"userId": 1, "title": "Buy milk", "completed": False}
+#   response = requests.post(api_url, json=todo)
+#   response.json() <-- this data is now a Python dictionary
+#   print(data)
+#   print(data['userId'], data["title"])
+#   for i in data['people1']:
+#       print("Name:", i['name'])
+#       print("Website:", i['website'])
+#       print("From:", i['from'])
+#       print()
+
+#  OR, above accomplishes the same as below
+
+#   import requests
+#   import json
+#   api_url = "https://jsonplaceholder.typicode.com/todos"
+#   todo = {"userId": 1, "title": "Buy milk", "completed": False}
+#   headers =  {"Content-Type":"application/json"}
+#   response = requests.post(api_url, data=json.dumps(todo), headers=headers)
+#   response.json()
+
+
+#  SIMPLE PUT REQUEST - uses Python to send HTTP request to update data in API // need to call GET first
+#   import requests
+#   api_url = "https://jsonplaceholder.typicode.com/todos/10"
+#   response = requests.get(api_url)
+#   response.json()
+#   todo = {"userId": 1, "title": "Wash car", "completed": True}
+#   response = requests.put(api_url, json=todo)
+#   response.json()
+
+
+#   SIMPLE DELETE REQUEST - uses Python to send HTTP request to delete data in API
+#   import requests
+#   api_url = "https://jsonplaceholder.typicode.com/todos/10"
+#   response = requests.delete(api_url)
+#   response.json()
+
+
+#  
