@@ -140,3 +140,13 @@ const shortWords = ['pie', 'cry', 'sigh', 'feet']
 const checkShortWords = shortWords.every(word => word.length <= 4)
 
 checkShortWords = true
+
+
+// .indexOf(element)
+
+const critters = ['armadillo', 'chipmunk', 'kitten', 'squirrel']
+const idxOfKitten = critters.indexOf('kitten')
+const idxOfCat = critters.indexOf('cat')
+
+idxOfKitten = 2
+idxOfCat = -1

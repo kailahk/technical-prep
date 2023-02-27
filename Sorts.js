@@ -1,4 +1,4 @@
-// COMMON SORTING METHODS
+// COMMON SORTING ALGORITHMS
 
 // Comparison sorts: compares two values and decides which to put first
 // Distribution sorts: uses some property of the items to decide where they fit
